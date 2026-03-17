@@ -4,6 +4,6 @@ public class RocketLauncher : ProjectileWeapon
 {
     protected override void Fire()
     {
-        SpawnProjectile(firePoint.forward);
+        SpawnProjectile(firePoint.forward, damage);
     }
 }

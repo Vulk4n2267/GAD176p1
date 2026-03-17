@@ -1,15 +1,16 @@
 using UnityEngine;
 
-public abstract class ProjectileWeapon : Weapons
+public abstract class ProjectileWeapon : IWeapon
 {
-    
+    [Header("Projectile")]
     public GameObject projectilePrefab;
     public Transform firePoint;
     public float projectileForce = 20f;
 
+    [Header("Damage")]
     public float damage = 10f;
 
-    protected void SpawnProjectile(Vector3 direction)
+    protected void SpawnProjectile(Vector3 direction, float dmg)
     {
         GameObject projectile = Instantiate(
             projectilePrefab,
@@ -19,15 +20,10 @@ public abstract class ProjectileWeapon : Weapons
 
         Rigidbody rb = projectile.GetComponent<Rigidbody>();
         if (rb != null)
-        {
             rb.AddForce(direction * projectileForce, ForceMode.Impulse);
-        }
 
-        // Assign damage dynamically
         Projectile proj = projectile.GetComponent<Projectile>();
         if (proj != null)
-        {
-            proj.damage = damage;
-        }
+            proj.damage = dmg;
     }
 }
